@@ -15,7 +15,7 @@ class Login extends Component{
 
         event.preventDefault();
         alert("HandleLogin Triggered");
-        this.props.loginUser({username:this.email.value,password:this.password.value});
+        this.props.loginUser({email:this.email.value,password:this.password.value});
         event.preventDefault();
     }
 
