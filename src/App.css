@@ -23,3 +23,33 @@
 .ant-card-head{
   background-color: #1890ff;
 }
+.header{
+  background-image: url('./shared/images/header1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color:whitesmoke;
+}
+.header h1{
+  color:whitesmoke;
+}
+.overlay{
+  background-color: rgba(0.31,0.31,0.31,0.7);
+}
+.imgCard{
+  margin:2px;
+}
+
+.logOut{
+  position: absolute;
+  right:1px;
+  top:2px;
+  margin-left: auto;
+}
+.rightCol{
+  height:50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}

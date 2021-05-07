@@ -59,3 +59,93 @@ export const loginUser = (creds) => (dispatch)=>{
     })
 
 }
+
+export const fetchImagesRequest =()=> ({
+    type:ActionTypes.FETCH_IMAGE_REQUEST
+});
+
+export const fetchImagesSuccess = (images)=>({
+    type:ActionTypes.FETCH_IMAGE_SUCCESS,
+    payload:images
+});
+
+export const fetchImagesFailed = (message) => ({
+    type:ActionTypes.LOGIN_REQUEST_FAILED,
+    payload:message
+});
+export const fetchImages = ()=>(dispatch)=>{
+
+    dispatch(fetchImagesRequest());
+
+    fetch(baseUrl + "images")
+    .then((response)=>{
+        if(response.ok){
+            return response;
+        }
+
+        else{
+            var err = new Error("Unable to Fetch Images ");
+            err.response = response;
+            throw err;
+        }
+    },(error)=>{
+        throw error;
+    })
+    .then((response)=>{
+        return response.json();
+    })
+    .then((response)=>{
+        dispatch(fetchImagesSuccess(response));
+    })
+
+    .catch((error)=>{
+        dispatch(fetchImagesFailed(error.message));
+    })
+
+}
+export const logoutRequest = ()=>({
+    type:ActionTypes.LOGOUT_REQUEST
+});
+export const logoutSuccess = ()=>({
+    type:ActionTypes.LOGOUT_SUCCESS
+});
+export const logoutFailed = (mess) =>({
+    type:ActionTypes.LOGOUT_FAILED,
+    payload:mess
+});
+export const logoutUser = () =>(dispatch)=>{
+
+    dispatch(logoutRequest());
+    localStorage.removeItem('token');
+    localStorage.removeItem('creds');
+    dispatch(logoutSuccess());
+}
+export const signupUser = (creds)=>(dispatch)=>{
+    fetch(baseUrl+"users/signup",{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(creds)
+    })
+    .then((response)=>{
+        if(response.ok){
+            return response;
+        }
+        else{
+            var err = new Error("User to signup");
+            err.response = response;
+            throw err;
+        }
+    },(error)=>{
+        throw error;
+    })
+    .then((response)=>response.json())
+    .then((response)=>{
+        alert("User : " + response.username + 
+            "\n Successfully Registered , Now you can Login");
+    })
+    .catch((err)=>{
+        alert(err.message);
+    })
+}

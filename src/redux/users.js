@@ -19,6 +19,14 @@ export const user = (state = {
         case ActionTypes.LOGIN_REQUEST_FAILED : 
             return {...state , isLoading:false,isAuthenticated:false,err:action.payload.message};
 
+        case ActionTypes.LOGOUT_REQUEST : 
+            return {...state,isLoading:true};
+
+        case ActionTypes.LOGOUT_SUCCESS :
+            return {...state,isLoading:false,isAuthenticated:false};
+
+        case ActionTypes.LOGOUT_FAILED :
+            return {...state,isLoading:false,isAuthenticated:true,err:action.payload};
         default : 
             return state;
     }
